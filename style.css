@@ -13,6 +13,39 @@ body{
     background: linear-gradient(rgb(47,150,163), rgb(94, 102, 151));
     font-family: sans-serif;
     color: white;
+    padding: 20px;
+}
+
+.search{
+    flex-direction: row;
+}
+
+.search input{
+    font-size: 15px;
+    border-radius: 20px;
+    margin-bottom: 20%;
+    border: 3px solid black;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.search i{
+    cursor: pointer;
+}
+
+.search-txt{
+
+}
+
+/* .search-btn{
+    float: right;
+    border-radius: 50%;
+    display: flex;
+    align-items:  center;
+} */
+
+.title-text h1{
+    margin-bottom: 30%;
 }
 
 .location, .temperature{

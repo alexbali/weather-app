@@ -7,6 +7,17 @@ window.addEventListener('load', ()=>{
     let temperatureDescription = document.querySelector('.temperature-description');
     let temperatureDegree = document.querySelector('.temperature-degree');
     let temperatureTimeZone = document.querySelector('.location-timezone');
+    searchbar = document.getElementById('search-bar');
+    
+    searchbar.addEventListener('keypress', (e) =>{
+        if (e.key === 'Enter') {
+            // console.log(e.target.value);
+            if (e.target.value != ""){
+                console.log("not empty")
+                cityByName(e.target.value);
+            }
+        }
+    });
    
     
     if(navigator.geolocation){
@@ -25,12 +36,12 @@ window.addEventListener('load', ()=>{
             fetch(req).then(response => {
                 response.json().then(values =>{
                     console.log(values);
-                    const {feelslike_f, condition} = values.current;
+                    const {feelslike_c, condition} = values.current;
                     const {name} = values.location;
                     // console.log(feelslike_f);
                     // console.log(condition.text);
                     // set the DOM elements from the API
-                    temperatureDegree.textContent = feelslike_f;
+                    temperatureDegree.textContent = feelslike_c;
                     temperatureDescription.textContent = condition.text;
                     temperatureTimeZone.textContent = name;
                     let temperatureIcon = document.querySelector('.icon');
@@ -48,5 +59,27 @@ window.addEventListener('load', ()=>{
         const skycon = new skycon({color: "white"})
     }
 
-
+    function cityByName(cityName) {
+        const req = `http://api.weatherapi.com/v1/current.json?key=713ff24050144147a7981439212810&q=${cityName}`;
+        fetch(req).then(response => {
+            if (response.status === 400) {
+                alert("search returned no values");
+                return "invalid";
+                // console.log(response.status)
+            }
+            response.json().then(values =>{
+                console.log(values);
+                const {feelslike_c, condition} = values.current;
+                const {name} = values.location;
+                // console.log(feelslike_f);
+                // console.log(condition.text);
+                // set the DOM elements from the API
+                temperatureDegree.textContent = feelslike_c;
+                temperatureDescription.textContent = condition.text;
+                temperatureTimeZone.textContent = name;
+                let temperatureIcon = document.querySelector('.icon');
+                temperatureIcon.src = condition.icon;
+            })
+        });
+    }
 });
