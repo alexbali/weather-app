@@ -8,6 +8,8 @@ window.addEventListener('load', ()=>{
     let temperatureDegree = document.querySelector('.temperature-degree');
     let temperatureTimeZone = document.querySelector('.location-timezone');
     searchbar = document.getElementById('search-bar');
+    searchIcon = document.getElementById('search-icon');
+    console.log(searchIcon)
     
     searchbar.addEventListener('keypress', (e) =>{
         if (e.key === 'Enter') {
@@ -17,6 +19,13 @@ window.addEventListener('load', ()=>{
                 cityByName(e.target.value);
             }
         }
+    });
+
+    searchIcon.addEventListener('click', () =>{
+        console.log(searchbar.value);
+        if (searchbar.value != ""){
+            cityByName(searchbar.value)
+        }            
     });
    
     
